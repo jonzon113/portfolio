@@ -154,6 +154,12 @@
     border-bottom: 1px solid var(--hairline);
   }
 
+  a.work-card {
+    transition: opacity 0.2s ease;
+  }
+  a.work-card:hover { opacity: 0.72; }
+  a.work-card:hover h3 { color: var(--amber-text); }
+
   .work-card:nth-child(2) { margin-left: 0; }
   .work-card:nth-child(3) { margin-left: 0; }
   .work-card:last-child { border-bottom: none; }
@@ -169,6 +175,7 @@
     font-family: var(--serif);
     font-size: 26px;
     margin-bottom: 10px;
+    transition: color 0.2s ease;
   }
 
   .work-card p {
@@ -191,6 +198,13 @@
     font-size: 12px;
     color: #b7b0a3;
     font-style: italic;
+  }
+
+  .work-card .view-link {
+    margin-top: 16px;
+    font-size: 12.5px;
+    color: var(--amber-text);
+    font-weight: 600;
   }
 
   /* ---------- About ---------- */
@@ -300,15 +314,15 @@
       <span class="eyebrow">Selected Work</span>
       <div class="work-list">
 
-        <div class="work-card">
+        <a class="work-card" href="case-study-1.html">
           <div class="work-index">01</div>
           <div>
             <h3>Connectivity Solutions North Star & Embedded Finance Patent</h3>
-            <p>A zero-to-one strategy engagement that defined the multi-year vision Wells Fargo is still executing against — and produced an original, patent-filed concept for an embedded-finance shopping experience.</p>
-            <span class="work-tag">ZERO-TO-ONE STRATEGY</span>
-            <div class="placeholder-note">Case study in development — full write-up coming soon.</div>
+            <p>A service-design-led diagnostic effort that defined the multi-year vision Wells Fargo is still executing against — and surfaced the structural framework that led to a filed patent for an embedded-finance shopping experience.</p>
+            <span class="work-tag">EXPERIENCE STRATEGY & SERVICE DESIGN</span>
+            <div class="view-link">View case study →</div>
           </div>
-        </div>
+        </a>
 
         <div class="work-card">
           <div class="work-index">02</div>

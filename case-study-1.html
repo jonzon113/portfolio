@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connectivity Solutions North Star & Patent — Jonathan Monzon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Sans+3:wght@400;500;600;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1A1A1A;
+    --paper: #FBFAF7;
+    --amber: #E59C33;
+    --amber-text: #B9791F;
+    --slate: #6B6B6B;
+    --hairline: #E4DFD4;
+    --cream: #F2EDE4;
+    --muted-red: #B0645A;
+    --serif: 'Source Serif 4', Georgia, "Times New Roman", serif;
+    --sans: 'Source Sans 3', -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    --hand: 'Caveat', cursive;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--paper); color: var(--ink); line-height: 1.6; }
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- Rail (identical to homepage) ---------- */
+  .rail {
+    position: fixed; top: 0; left: 0; width: 300px; height: 100vh;
+    background: var(--ink); color: var(--cream);
+    padding: 56px 40px; display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .rail-name { font-family: var(--serif); font-size: 26px; line-height: 1.25; color: #fff; }
+  .rail-title { font-size: 11px; letter-spacing: 3px; color: var(--amber); margin-top: 8px; font-weight: 600; }
+  .rail-nav { margin-top: 48px; display: flex; flex-direction: column; gap: 18px; }
+  .rail-nav a { font-size: 13px; color: var(--cream); display: flex; align-items: center; gap: 10px; transition: color 0.2s ease; }
+  .rail-nav a:hover, .rail-nav a.active { color: var(--amber); }
+  .rail-nav a::before { content: "–"; color: var(--amber); }
+  .rail-footer { font-size: 12px; color: #9a9a9a; line-height: 1.8; }
+  .rail-footer a:hover { color: var(--amber); }
+
+  /* ---------- Main ---------- */
+  .main { margin-left: 300px; padding: 0 80px 100px; max-width: 920px; }
+
+  .cs-header { padding-top: 90px; padding-bottom: 40px; border-bottom: 1px solid var(--hairline); margin-bottom: 48px; }
+  .eyebrow { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--amber-text); font-weight: 600; margin-bottom: 14px; }
+  .cs-title { font-family: var(--serif); font-size: 40px; line-height: 1.2; max-width: 780px; }
+  .cs-context { font-size: 13.5px; color: var(--slate); margin-top: 16px; }
+
+  .cs-section { margin-bottom: 64px; }
+  .cs-section h2 {
+    font-family: var(--serif); font-size: 15px; font-weight: 600; font-style: italic;
+    color: var(--amber-text); margin-bottom: 16px; text-transform: none;
+  }
+  .cs-section p { font-size: 16px; color: var(--ink); max-width: 700px; margin-bottom: 16px; }
+  .cs-section p:last-child { margin-bottom: 0; }
+
+  .pullquote {
+    font-family: var(--serif); font-style: italic; font-size: 22px; line-height: 1.5;
+    color: var(--ink); border-left: 3px solid var(--amber); padding-left: 24px;
+    max-width: 620px; margin: 32px 0;
+  }
+
+  .visual-block { margin: 32px 0 40px; }
+  .visual-caption { font-size: 12px; color: var(--slate); margin-top: 10px; max-width: 700px; }
+
+  /* ---------- Journey map (embedded) ---------- */
+  .jm-frame { border: 1px solid var(--hairline); background: #fff; padding: 32px; }
+  .jm-title { font-family: var(--serif); font-size: 17px; margin-bottom: 4px; }
+  .jm-sub { font-size: 11.5px; color: var(--slate); margin-bottom: 20px; max-width: 560px; }
+  .jm-stages { display: grid; grid-template-columns: repeat(5, 1fr); margin-top: 16px; }
+  .jm-stage-label { font-size: 9.5px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--amber-text); font-weight: 600; text-align: center; padding-bottom: 10px; border-bottom: 2px solid var(--hairline); }
+  .jm-chart { position: relative; height: 190px; margin-top: 6px; display: flex; }
+  .jm-yaxis { display: flex; flex-direction: column; justify-content: space-between; align-items: center; width: 30px; padding: 4px 0; }
+  .jm-yaxis .cap { font-size: 8.5px; letter-spacing: 1px; text-transform: uppercase; color: var(--slate); font-weight: 600; }
+  .jm-yaxis .axis-title { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 9px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--ink); font-weight: 600; margin: 8px 0; }
+  .jm-legend { display: flex; gap: 20px; margin-top: 12px; font-size: 10.5px; color: var(--slate); }
+  .jm-legend span { display: flex; align-items: center; gap: 6px; }
+  .jm-swatch { width: 16px; height: 3px; display: inline-block; }
+  .jm-callouts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 28px; }
+  .jm-callout { border: 1px solid var(--hairline); padding: 12px 14px; background: #fff; }
+  .jm-callout .tag { font-size: 8.5px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted-red); font-weight: 600; margin-bottom: 6px; display: block; }
+  .jm-callout h4 { font-family: var(--serif); font-size: 12.5px; margin-bottom: 4px; font-weight: 600; }
+  .jm-callout p { font-size: 10.5px; color: var(--slate); line-height: 1.45; margin: 0; }
+  .jm-resolution { margin-top: 14px; padding: 14px 18px; background: var(--ink); color: var(--paper); display: flex; align-items: center; gap: 14px; }
+  .jm-resolution .tag { font-size: 8.5px; letter-spacing: 1px; text-transform: uppercase; color: var(--amber); font-weight: 600; white-space: nowrap; }
+  .jm-resolution p { font-size: 11.5px; line-height: 1.5; color: #E8E4DC; margin: 0; }
+  .jm-resolution p strong { color: #fff; }
+
+  /* ---------- Concept framework ladder (embedded) ---------- */
+  .cf-frame { border: 1px solid var(--hairline); background: #fff; padding: 32px; }
+  .ladder { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+  .rung { display: flex; align-items: stretch; border: 1.5px dashed #B7AF9E; }
+  .rung-label { width: 100px; display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 12.5px; font-style: italic; color: var(--ink); background: #EDE9DF; border-right: 1.5px dashed #B7AF9E; }
+  .rung-items { display: flex; flex: 1; align-items: center; gap: 12px; padding: 12px 16px; flex-wrap: wrap; }
+  .node { border: 1.5px dashed #B7AF9E; padding: 7px 12px; font-size: 11.5px; color: var(--slate); background: var(--paper); }
+  .node.solution { color: var(--ink); font-weight: 600; border-color: var(--amber); }
+  .connector { color: #B7AF9E; font-size: 13px; }
+
+  .flow-img { margin-top: 24px; width: 100%; border: 1px solid var(--hairline); }
+
+  /* ---------- Outcomes grid ---------- */
+  .outcomes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--hairline); border: 1px solid var(--hairline); margin-top: 8px; }
+  .outcome-card { background: #fff; padding: 22px 24px; }
+  .outcome-card .theme { font-size: 10.5px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--amber-text); font-weight: 600; margin-bottom: 8px; }
+  .outcome-card p { font-size: 13.5px; color: var(--ink); margin: 0; line-height: 1.5; }
+
+  .confidentiality-note { font-size: 11px; color: #A39E92; font-style: italic; margin-top: 12px; }
+
+  .cs-nav-footer { display: flex; justify-content: space-between; padding-top: 40px; margin-top: 60px; border-top: 1px solid var(--hairline); font-size: 13px; }
+  .cs-nav-footer a:hover { color: var(--amber-text); }
+
+  @media (max-width: 860px) {
+    .rail { position: relative; width: 100%; height: auto; flex-direction: row; align-items: center; justify-content: space-between; padding: 20px 24px; }
+    .rail-nav { flex-direction: row; margin-top: 0; gap: 16px; }
+    .rail-footer { display: none; }
+    .main { margin-left: 0; padding: 0 24px 60px; }
+    .cs-title { font-size: 28px; }
+    .jm-stages, .jm-callouts, .outcomes-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+  <nav class="rail">
+    <div>
+      <div class="rail-name">Jonathan<br>Monzon</div>
+      <div class="rail-title">DESIGN DIRECTOR</div>
+      <div class="rail-nav">
+        <a href="index.html#work">Work</a>
+        <a href="index.html#about">About</a>
+        <a href="resume.pdf">Resume</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+    </div>
+    <div class="rail-footer">
+      San Francisco, CA<br>
+      <a href="mailto:monzon.jonathan@gmail.com">monzon.jonathan@gmail.com</a><br>
+      <a href="https://linkedin.com/in/jonathanmonzon" target="_blank">LinkedIn ↗</a>
+    </div>
+  </nav>
+
+  <main class="main">
+
+    <div class="cs-header">
+      <div class="eyebrow">Experience Strategy & Service Design</div>
+      <h1 class="cs-title">Connectivity Solutions North Star & the Embedded Finance Patent</h1>
+      <div class="cs-context">Wells Fargo — Open Banking · Product Design Lead → Manager, AVP · 2022–2023</div>
+    </div>
+
+    <div class="cs-section">
+      <h2>The Situation</h2>
+      <p>Wells Fargo's developer integration platform had been live since 2018 — functional, but its experience hadn't kept pace with how much client demand and complexity had grown around it. There was no shared diagnosis of where the experience was falling short, and no modernization roadmap grounded in actual client friction rather than internal assumption. Growth had outrun strategy.</p>
+    </div>
+
+    <div class="cs-section">
+      <h2>The Bet</h2>
+      <p>Rather than starting from point-fixes, I defined a structural framework — mapping how any client's business need should translate into a task, a product, and ultimately a solution — intended to be reusable across client types rather than built around any single feature.</p>
+      <p>Applying that framework to clients without a technical team surfaced a specific, previously invisible gap: no existing path served them at all. That gap became the seed of the embedded finance concept — a genuinely new, no-code integration modality explored in parallel with the broader diagnostic work.</p>
+
+      <div class="visual-block">
+        <div class="cf-frame">
+          <div class="jm-title">A. The structural framework: task → product → solution</div>
+          <div class="jm-sub">A general framework for how any client's business need should map to what we offer — built to be reusable across client types.</div>
+          <div class="ladder">
+            <div class="rung">
+              <div class="rung-label">Task</div>
+              <div class="rung-items">
+                <div class="node">Feature 1</div><span class="connector">＋</span>
+                <div class="node">Feature 2</div><span class="connector">＋</span>
+                <div class="node">Feature 3</div>
+              </div>
+            </div>
+            <div class="rung">
+              <div class="rung-label">Product</div>
+              <div class="rung-items">
+                <div class="node">Product A</div><span class="connector">＋</span>
+                <div class="node">Product B</div>
+              </div>
+            </div>
+            <div class="rung">
+              <div class="rung-label">Solution</div>
+              <div class="rung-items"><div class="node solution">Client Solution</div></div>
+            </div>
+          </div>
+          <img class="flow-img" src="assets/panel-b-flow.svg" alt="Diagram showing the decision point where clients without a technical team branch to a new no-code embedded path">
+        </div>
+        <div class="visual-caption">Original recreation built from documented reasoning to protect employer confidentiality — not a reproduction of any internal artifact. Labels are illustrative placeholders.</div>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <h2>Getting Alignment</h2>
+      <p>The current-state journey map became the shared artifact that got Product and cross-functional partners aligned on where it actually hurt — manual verification repeated per service, opaque pricing negotiation, missing production tooling, reactive-only support — rather than relying on assumptions about the client experience. The future-state journey, built from the same framework, gave partners a concrete picture of the target: same-day service provisioning, proactive support, self-service pricing.</p>
+      <p>In parallel, early prototypes built from the embedded finance concept forced concrete conversations between the Embedded Finance and Authentication teams about the real complexity of externalizing our experience into third-party platforms — a conversation that hadn't happened yet at that level of specificity.</p>
+
+      <div class="visual-block">
+        <div class="jm-frame">
+          <div class="jm-title">Integration Journey — Current vs. Future State</div>
+          <div class="jm-sub">Primary persona: Technical Integrator</div>
+
+          <div class="jm-stages">
+            <div class="jm-stage-label">Awareness</div>
+            <div class="jm-stage-label">Interest</div>
+            <div class="jm-stage-label">Decision</div>
+            <div class="jm-stage-label">Activation</div>
+            <div class="jm-stage-label">Maintenance</div>
+          </div>
+
+          <div class="jm-chart">
+            <div class="jm-yaxis">
+              <span class="cap">Positive</span>
+              <span class="axis-title">Client Experience</span>
+              <span class="cap">Negative</span>
+            </div>
+            <div style="flex:1;">
+              <svg viewBox="0 0 1180 190" width="100%" height="190" preserveAspectRatio="none">
+                <line x1="0" y1="95" x2="1180" y2="95" stroke="#E4DFD4" stroke-width="1" stroke-dasharray="4 4"/>
+                <polyline points="60,66 296,51 532,44 768,33 1120,36" fill="none" stroke="#E59C33" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="60" cy="66" r="4" fill="#E59C33"/><circle cx="296" cy="51" r="4" fill="#E59C33"/><circle cx="532" cy="44" r="4" fill="#E59C33"/><circle cx="768" cy="33" r="4" fill="#E59C33"/><circle cx="1120" cy="36" r="4" fill="#E59C33"/>
+                <polyline points="60,69 296,128 532,142 768,110 1120,150" fill="none" stroke="#B0645A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="60" cy="69" r="4" fill="#B0645A"/><circle cx="296" cy="128" r="4" fill="#B0645A"/><circle cx="532" cy="142" r="4" fill="#B0645A"/><circle cx="768" cy="110" r="4" fill="#B0645A"/><circle cx="1120" cy="150" r="4" fill="#B0645A"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="jm-legend">
+            <span><i class="jm-swatch" style="background:#B0645A;"></i>Current State</span>
+            <span><i class="jm-swatch" style="background:#E59C33;"></i>Future State</span>
+          </div>
+
+          <div class="jm-callouts">
+            <div class="jm-callout"><span class="tag">Awareness → Interest</span><h4>Gated exploration</h4><p>Account creation is required just to access a test environment.</p></div>
+            <div class="jm-callout"><span class="tag">Decision</span><h4>Opaque pricing</h4><p>Pricing requires manual, back-and-forth negotiation.</p></div>
+            <div class="jm-callout"><span class="tag">Activation</span><h4>Redundant verification</h4><p>Manual verification repeats before go-live.</p></div>
+            <div class="jm-callout"><span class="tag">Maintenance</span><h4>Reactive-only support</h4><p>No proactive alerting exists.</p></div>
+          </div>
+
+          <div class="jm-resolution">
+            <span class="tag">Future State</span>
+            <p><strong>Same-day, self-service across the full journey</strong> — instant access, transparent pricing, automated verification, and proactive monitoring replace every manual gate identified above.</p>
+          </div>
+        </div>
+        <div class="visual-caption">Journey map generalized from original service-design research to protect employer confidentiality. Structure and findings reflect actual diagnostic work; process names and terminology have been abstracted.</div>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <h2>The Outcome</h2>
+      <p>The North Star vision built from this diagnostic work became the foundation Wells Fargo is still executing against — directly shaping the 2024 roadmap and the 2025 Developer Portal redesign. Separately, the embedded finance exploration produced enough original, defensible thinking to become the basis for a filed patent application (US19008933) for an embedded-finance shopping experience.</p>
+
+      <div class="visual-block">
+        <div class="outcomes-grid">
+          <div class="outcome-card"><div class="theme">Discoverability</div><p>Case studies, solution pages, and partner content shipped to help clients self-identify the right offering.</p></div>
+          <div class="outcome-card"><div class="theme">Developer Capability</div><p>Open Sandbox, API Playground, and updated documentation reduced friction in technical evaluation.</p></div>
+          <div class="outcome-card"><div class="theme">Self-Service</div><p>Webhooks and profile management shipped as the first self-service layer on top of the platform.</p></div>
+          <div class="outcome-card"><div class="theme">Visual Identity</div><p>A full visual redesign relaunched in Oct 2025, repositioning the platform for a technical, decision-making audience.</p></div>
+        </div>
+        <div class="confidentiality-note">Roadmap themes shown reflect only initiatives that have publicly shipped; unreleased roadmap items are excluded.</div>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <h2>The Reflection</h2>
+      <p>The instinct to reach for a fix is strong when you can see friction clearly — and it would have been easy to jump straight to designing an embedded finance flow the moment the gap became visible. The harder discipline was building the structural framework first: a reusable way to map any client's business need to a solution, independent of any single product. That framework didn't just organize the thinking — it was what surfaced the highest-leverage problem in the first place. The gap for non-technical clients wasn't visible from inside the existing technical journey; it only became obvious once every client type was run through the same structure.</p>
+      <p>The framework also solved a problem I hadn't set out to solve: scalability of the team's own decision-making. Before it existed, every new client scenario prompted a fresh, case-by-case debate about how it should be handled — a real drag on a team already managing competing priorities. Once the pattern was defined, most new scenarios could be resolved by applying the existing structure rather than re-litigating it from scratch. That freed up real bandwidth — not hypothetically, but in the number of open strategic questions the team could actually take on at once.</p>
+
+      <div class="pullquote">The strategic leverage usually isn't in the first good idea — it's in building the tool that reliably finds the next one, and, just as often, in the operational overhead that tool quietly removes.</div>
+    </div>
+
+    <div class="cs-nav-footer">
+      <a href="index.html#work">← Back to Work</a>
+      <a href="index.html#contact">Get in touch →</a>
+    </div>
+
+  </main>
+
+</body>
+</html>
